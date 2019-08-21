@@ -4,37 +4,33 @@
 
 <div class="container text-center">
 
-   
 
-           <h1>Nova publicação</h1>
 
-           <form method="POST" enctype="multipart/form-data" action="/posts">
+ <h2>Nova publicação</h2>
 
-         
+  <form method="POST" enctype="multipart/form-data" action="/posts">
+    @csrf
 
-               @csrf
-               <div class="row">
-               <div class="col-md-8">
+    <div class="form-group">
+      <label for="image_path">Arquivo:</label>
+      <input type="file" name="image_path" class="form-control">
+    </div>
 
-               Descrição<textarea type="text" name="description"></textarea>
+    <div class="form-group">
+      <label for="description">Descrição</label>
+      <textarea type="text" name="description" class="form-control"></textarea>
+    </div>
 
-         
+    <div class="form-group"> 
+      <label for="filter">Filtro:</label>
+      <input type="text" name="filter" class="form-control">
+    </div>
 
-               Filter:<input type="text" name="filter">
+    <div class="form-group">
+      <button type="submit" class="btn btn-dark">Postar</button>
+    </div>
 
-         
-
-               Arquivo:<input type="file" name="image_path">
-
-         
-
-               <button type="submit">vai</button>
-
-           </form>
-
-       </div>
-
-   </div>
+  </form>
 
 </div>
 
