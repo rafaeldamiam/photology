@@ -15,11 +15,6 @@
                     @endif
 
                     Você está conectado!!!
-
-
-                    <div class="container text-center">
-                        <a class="btn btn-dark" href="{{url('/posts/create')}}">Criar Postagem</a>
-                    </div>
                     
                 </div>
             </div>
