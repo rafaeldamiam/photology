@@ -2,11 +2,11 @@
 
     <div class="row">
 
-        <div class="{{ $clases }} bg-white border text-center mt-2 pr-5 pl-5 pt-2 pb-0">
+        <div class="{{ $clases }} bg-white border text-center mt-2 pr-8 pl-8 pt-2 pb-0">
 
            
 
-            <h1>Photology</h1>
+            <img class="text-center" src="{{ asset('images/logo.png') }}">
 
             <h3>Inscreva-se para ver fotos e vídeos de seus amigos</h3>
 

@@ -21,9 +21,7 @@
     <!-- Fonts -->
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-
-   
-
+    <link rel="sortcut icon" href="{{ asset('images/icon.png') }}" type="image/gif">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
