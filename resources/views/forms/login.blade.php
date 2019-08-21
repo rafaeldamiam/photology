@@ -2,9 +2,9 @@
 
     <div class="row">
 
-        <div class="offset-md-4 col-md-4 border text-center p-5 bg-white">            
+        <div class="offset-md-4 col-md-4 border text-center p-8 bg-white">            
 
-            <h1 class="">Photology</h1>
+            <img class="text-center" src="{{ asset('images/logo.png') }}" >
 
                
 
