@@ -2,19 +2,19 @@
 
 @section('content')
 
-<div class="container">
+<div class="container text-center">
 
-   <div class="row justify-content-center">
+   
 
-       <div class="col-md-8">
-
-           <h1>Novo POST</h1>
+           <h1>Nova publicação</h1>
 
            <form method="POST" enctype="multipart/form-data" action="/posts">
 
          
 
                @csrf
+               <div class="row">
+               <div class="col-md-8">
 
                Descrição<textarea type="text" name="description"></textarea>
 
