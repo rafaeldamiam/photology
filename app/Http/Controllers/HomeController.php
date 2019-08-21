@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Photology\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
-use App\Post;
+use Photology\Post;
 
 class HomeController extends Controller
 
