@@ -55,8 +55,8 @@ class HomeController extends Controller
     }
 
     public function home(){
-
-        return view('home');
+        $posts = Post::all();
+        return view('home')->with('posts', $posts);
 
     }
 

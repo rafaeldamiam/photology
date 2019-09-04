@@ -19,8 +19,8 @@ class PostsController extends Controller
    }
 
    public function index(){
-
-       $posts = Post::all();
+        $id = auth()->id();
+        $posts = Post::all()->where('id', $id);
 
        return view('posts.list')->with('posts', $posts);
 
