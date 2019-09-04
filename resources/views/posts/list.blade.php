@@ -17,8 +17,18 @@
                    <div class="card-body">{{$post->description}}</div>
                    
                    <div class="card-body">{{$post->likes}}</div>
-                   <div class="card-body">{{$post->coments}}</div>
+                   <img src="{{ asset('images/like.png') }}">
 
+                    <form action="" method="post">
+                        @csrf
+                        <div class="form-group">
+                          <textarea type="text" name="comment" class="form-control"></textarea>
+                        </div>
+                      
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-dark">Comentar</button>
+                        </div>
+                    </form>
                </div>   
 
            @endforeach
