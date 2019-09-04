@@ -15,6 +15,9 @@
                    <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap">
 
                    <div class="card-body">{{$post->description}}</div>
+                   <!--<img class="" src="{{asset(images/like.png)}}" alt="">-->
+                   <div class="card-body">{{$post->likes}}</div>
+                   <div class="card-body">{{$post->coments}}</div>
 
                </div>   
 
