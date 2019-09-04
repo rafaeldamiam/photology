@@ -3,7 +3,7 @@
 namespace Photology\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Photology\User;
 use Photology\Post;
 
 class PostsController extends Controller
@@ -20,9 +20,11 @@ class PostsController extends Controller
 
    public function index(){
         $id = auth()->id();
-        $posts = Post::all()->where('id', $id);
-
-       return view('posts.list')->with('posts', $posts);
+        //dd($id);
+        $posts = Post::all()->where('user_id', $id);
+        $user = User::all()->where('id', $id);
+        //dd($user);
+        return view('posts.list')->with('posts', $posts)->with('user', $user);
 
    }
 
