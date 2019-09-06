@@ -9,14 +9,15 @@
 
            @foreach ($posts as $post)
                 <div class="card mt-4">
+                    <h3 class="" >{{$post->name}}</h3> 
                     
 
                    <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap">
 
                    <div class="card-body">
-                        {{$post->description}} 
-                        {{$post->likes}} 
-                        {{$post->coments}}
+                        <p>Descrição: {{$post->description}}</p> 
+                        <p>Likes: {{$post->likes}}</p> 
+                        <p>Comentarios: {{$post->coments}}</p>
                    
                    </div>
 

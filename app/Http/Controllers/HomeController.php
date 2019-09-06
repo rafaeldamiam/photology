@@ -55,19 +55,8 @@ class HomeController extends Controller
     }
 
     public function home(){
-        $posts = Post::all();
-        //$id = $posts->id;
-        //dd($id);
-        //foreach($posts as $post){ 
-        //    $user = User::all()->where('id', $post->id);
-        //    return view('home')->with('posts', $posts)->with('user', $user);
-        //}
-        //dd($user);
-        //$leagues = DB::table('leagues')
-        //->select('league_name')
-        //->join('countries', 'countries.country_id', '=', 'leagues.country_id')
-        //->where('countries.country_name', $country)
-        //->get();
+        //$posts = Post::all();
+        $posts = Post::select('*')->join('users', 'posts.user_id', '=', 'users.id')->get();
         return view('home')->with('posts', $posts);
 
     }
