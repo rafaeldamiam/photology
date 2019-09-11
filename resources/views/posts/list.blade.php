@@ -20,11 +20,10 @@
                             <h3 class="" style="text-transform:capitalize;">{{$users->name}}</h3>
                         </div>
                     @endforeach 
-                    <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap">
+                    <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap" style="padding:10%;">
                     <div class="card-body">
                         <p>Descrição: {{$post->description}}</p> 
-                    </div>
-                    <div class="card-body">
+
                         @if ($post->likes == 0)
                             <a class="btn" href="{{route('like', ['idPost' => $post->id])}}">
                                 Like: <img src="{{ asset('images/like.svg') }}">

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Photology\User;
 use Photology\Post;
+use Photology\Like;
 
 class HomeController extends Controller
 
@@ -57,7 +58,9 @@ class HomeController extends Controller
     public function home(){
         //$posts = Post::all();
         $posts = Post::select('*')->join('users', 'posts.user_id', '=', 'users.id')->get();
-        return view('home')->with('posts', $posts);
+        $likes = Like::all();
+        //dd($posts);
+        return view('home')->with('posts', $posts)->with('like', $likes);
 
     }
 

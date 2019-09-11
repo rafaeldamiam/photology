@@ -6,7 +6,7 @@
    <div class="row justify-content-center">
 
        <div class="col-md-8">
-
+       
            @foreach ($posts as $post)
                 <div class="card mt-4">
                     <div class="card-body">
@@ -14,20 +14,22 @@
                     </div> 
                     
 
-                   <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap">
+                   <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap" style="padding:10%;">
                    <div class="card-body">
                         <p>Descrição: {{$post->description}}</p> 
-                   </div>
-                    <div class="card-body">
-                        @if ($post->likes == 0)
-                            <a class="btn" href="{{route('like', ['idPost' => $post->id])}}">
-                                Like: <img src="{{ asset('images/like.svg') }}">
-                            </a>
-                        @else
-                            <a class="btn" href="{{route('unlike', ['idPost' => $post->id])}}">
-                                {{$post->likes}} Like: <img src="{{ asset('images/like.svg') }}">
-                            </a>
-                        @endif 
+                        @foreach ($like as $likes)
+                            @if($likes->post_id == $post->id)
+                                @if (count($like) == 0)
+                                    <a class="btn" href="{{route('like', ['idPost' => $post->id])}}">
+                                        Like: <img src="{{ asset('images/like.svg') }}">
+                                    </a>
+                                @else
+                                    <a class="btn" href="{{route('unlike', ['idPost' => $post->id])}}">
+                                        {{count($likes->post_id)}} Like: <img src="{{ asset('images/like.svg') }}">
+                                    </a>
+                                @endif
+                            @endif
+                        @endforeach
                         <p>Comentarios: {{$post->coments}}</p>
                     </div>
 

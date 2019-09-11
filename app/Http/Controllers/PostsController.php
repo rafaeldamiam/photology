@@ -5,6 +5,7 @@ namespace Photology\Http\Controllers;
 use Illuminate\Http\Request;
 use Photology\User;
 use Photology\Post;
+use Photology\Like;
 
 class PostsController extends Controller
 
@@ -24,7 +25,7 @@ class PostsController extends Controller
         $posts = Post::all()->where('user_id', $id);
         $user = User::all()->where('id', $id);
         //dd($user);
-        return view('posts.list')->with('posts', $posts)->with('user', $user);
+        return view('posts.list', compact('posts', 'user'));
 
    }
 
@@ -50,9 +51,7 @@ class PostsController extends Controller
 
            'description' => request('description'),
 
-           'filter' => request('filter'),
-
-           'likes' => 0
+           'filter' => request('filter')
 
        ])->save();
 
@@ -60,20 +59,28 @@ class PostsController extends Controller
 
    }
 
-   public function like(Request $data){
-        $post_like = Post::findOrFail($data['idPost']);
-        $post_like->likes += 1;
-        $post_like->save();
-        $posts = Post::all();
-        return view('posts.list')->with('posts', $posts);;
+   public function like($post_id){
+        $a = Like::select('like_id')
+            ->where('user_id', auth()->id())
+            ->where('post_id', $post_id)
+            ->get();
+        if (count($a) == 0){
+            Like::create([
+                'user_id' => auth()->id(),
+                'post_id' => $post_id
+            ])->save();
+    
+        }
+        //dd($post_id);
+        
+        return redirect()->back();
    }
 
     public function unlike(Request $data){
         $post_like = Post::findOrFail($data['idPost']);
         $post_like->likes -= 1;
         $post_like->save();
-        $posts = Post::all();
-        return view('posts.list')->with('posts', $posts);;
+        return redirect()->back();
     }
 
 }
