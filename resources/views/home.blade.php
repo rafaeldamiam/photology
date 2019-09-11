@@ -9,17 +9,27 @@
 
            @foreach ($posts as $post)
                 <div class="card mt-4">
-                    <h3 class="" >{{$post->name}}</h3> 
+                    <div class="card-body">
+                        <h3 class="" style="text-transform:capitalize;">{{$post->name}}</h3>
+                    </div> 
                     
 
                    <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap">
-
                    <div class="card-body">
                         <p>Descrição: {{$post->description}}</p> 
-                        <p>Likes: {{$post->likes}}</p> 
-                        <p>Comentarios: {{$post->coments}}</p>
-                   
                    </div>
+                    <div class="card-body">
+                        @if ($post->likes == 0)
+                            <a class="btn" href="{{route('like', ['idPost' => $post->id])}}">
+                                Like: <img src="{{ asset('images/like.svg') }}">
+                            </a>
+                        @else
+                            <a class="btn" href="{{route('unlike', ['idPost' => $post->id])}}">
+                                {{$post->likes}} Like: <img src="{{ asset('images/like.svg') }}">
+                            </a>
+                        @endif 
+                        <p>Comentarios: {{$post->coments}}</p>
+                    </div>
 
                </div>   
 

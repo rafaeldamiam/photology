@@ -60,4 +60,20 @@ class PostsController extends Controller
 
    }
 
+   public function like(Request $data){
+        $post_like = Post::findOrFail($data['idPost']);
+        $post_like->likes += 1;
+        $post_like->save();
+        $posts = Post::all();
+        return view('posts.list')->with('posts', $posts);;
+   }
+
+    public function unlike(Request $data){
+        $post_like = Post::findOrFail($data['idPost']);
+        $post_like->likes -= 1;
+        $post_like->save();
+        $posts = Post::all();
+        return view('posts.list')->with('posts', $posts);;
+    }
+
 }

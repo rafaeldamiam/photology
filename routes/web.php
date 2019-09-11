@@ -13,3 +13,7 @@ Route::get('/posts/create','PostsController@create');
 Route::post('/posts','PostsController@store');
 
 Route::resource('notifications', 'NotificationController');
+
+Route::get('/like/{idPost}','PostsController@like')->name('like');
+
+Route::get('/unlike/{idPost}','PostsController@unlike')->name('unlike');
