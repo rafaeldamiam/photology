@@ -9,7 +9,7 @@
         <div class="text-center">
             <h1>Está vazio!!</h1><br>
             <h2>Crie um Postagem e compartilhe com o mundo!</h2><br>
-            <h3>(◉⩊◉)</h3>
+            <h3>\(◉⩊◉)/</h3>
         </div>
     @else
         <div class="col-md-8">
