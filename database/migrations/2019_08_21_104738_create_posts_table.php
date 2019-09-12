@@ -36,6 +36,8 @@ class CreatePostsTable extends Migration
 
            $table->text('description')->nullable();
 
+           $table->integer('like');
+
            $table->timestamps();
 
        });

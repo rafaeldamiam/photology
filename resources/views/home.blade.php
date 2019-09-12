@@ -19,13 +19,13 @@
                         <p>Descrição: {{$post->description}}</p> 
                         @foreach ($like as $likes)
                             @if($likes->post_id == $post->id)
-                                @if (count($like) == 0)
+                                @if($likes->user_id =! $post->user_id)
                                     <a class="btn" href="{{route('like', ['idPost' => $post->id])}}">
-                                        Like: <img src="{{ asset('images/like.svg') }}">
+                                    Curtidas: {{$post->like}} <img src="{{ asset('images/like.svg') }}" width="60%">
                                     </a>
                                 @else
                                     <a class="btn" href="{{route('unlike', ['idPost' => $post->id])}}">
-                                        {{count($likes->post_id)}} Like: <img src="{{ asset('images/like.svg') }}">
+                                    Curtidas: {{$post->like}} <img src="{{ asset('images/dislike.svg') }}" width="60%">
                                     </a>
                                 @endif
                             @endif

@@ -51,7 +51,9 @@ class PostsController extends Controller
 
            'description' => request('description'),
 
-           'filter' => request('filter')
+           'filter' => request('filter'),
+
+           'like' => 0
 
        ])->save();
 
@@ -69,9 +71,13 @@ class PostsController extends Controller
                 'user_id' => auth()->id(),
                 'post_id' => $post_id
             ])->save();
+            $post_like = Post::findOrFail($post_id);
+            $post_like->like += 1;
+            $post_like->save();
+
+            //dd($post_like);
     
         }
-        //dd($post_id);
         
         return redirect()->back();
    }

@@ -58,9 +58,8 @@ class HomeController extends Controller
     public function home(){
         //$posts = Post::all();
         $posts = Post::select('*')->join('users', 'posts.user_id', '=', 'users.id')->get();
-        $likes = Like::all();
-        //dd($posts);
-        return view('home')->with('posts', $posts)->with('like', $likes);
+        $like = Like::join('posts', 'posts.user_id', '=', 'likes.user_id')->get();
+        return view('home')->with('posts', $posts)->with('like', $like);
 
     }
 
