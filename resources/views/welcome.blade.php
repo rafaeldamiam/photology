@@ -2,6 +2,6 @@
 
 @section('content')
 
-    @include('forms.register', ['clases'=>'col-md-12 text-center'])                
+    @include('forms.register', ['clases'=>'offset-md-4 col-md-4'])                
 
 @endsection
