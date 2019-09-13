@@ -17,24 +17,21 @@
                 <div class="card mt-4">
                     <div class="card-body">
                         <h3 class="" style="text-transform:capitalize;">{{$post->name}}</h3>
-                    </div>
-                    <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap" style="padding:10%;">
-                    <div class="card-body">
+                        <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap" style="padding:10%;">
                         <p>Descrição: {{$post->description}}</p> 
-
-                        
-                            <a class="btn" href="{{route('like', ['idPost' => $post->id])}}">
-                                {{$post->like}} Like: <img width="110%" src="{{ asset('images/like.svg') }}">
-                            </a>
-                            <br>
-                            <a class="btn" href="{{route('unlike', ['idPost' => $post->id])}}">
-                                {{$post->like}} Dislike: <img width="75%" src="{{ asset('images/dislike.svg') }}">
-                            </a>
-                        
+                    @if($post->user_id =! auth()->user()->id)
+                        <a class="btn" href="{{route('like', ['idPost' => $post->id])}}">
+                            {{$post->like}} Like: <img width="110%" src="{{ asset('images/like.svg') }}">
+                        </a>
+                    @else
+                        <a class="btn" href="{{route('unlike', ['idPost' => $post->id])}}">
+                            {{$post->like}} Dislike: <img width="75%" src="{{ asset('images/dislike.svg') }}">
+                        </a>
+                    @endif
                         <p>Comentarios: {{$post->coments}}</p>
                     </div>
-                </div>   
-            @endforeach
+                </div>
+            @endforeach   
         </div>
     @endif
 </div>

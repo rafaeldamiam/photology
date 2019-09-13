@@ -11,28 +11,21 @@
                 <div class="card mt-4">
                     <div class="card-body">
                         <h3 class="" style="text-transform:capitalize;">{{$post->name}}</h3>
-                    </div> 
-                    
-
-                   <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap" style="padding:10%;">
-                   <div class="card-body">
+                        <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap" style="padding:10%;">
                         <p>Descrição: {{$post->description}}</p> 
-                        @foreach ($like as $likes)
-                                    <a class="btn" href="{{route('like', ['idPost' => $post->id])}}">
-                                    Curtidas: {{$post->like}} <img src="{{ asset('images/like.svg') }}" width="110%">
-                                    </a>
-                               
-                                    <a class="btn" href="{{route('unlike', ['idPost' => $post->id])}}">
-                                    Curtidas: {{$post->like}} <img src="{{ asset('images/dislike.svg') }}" width="75%">
-                                    </a>
 
-                        @endforeach
+                        <a class="btn" href="{{route('like', ['idPost' => $post->id])}}">
+                            {{$post->like}} Like: <img width="110%" src="{{ asset('images/like.svg') }}">
+                        </a>
+                        <br>
+                        <a class="btn" href="{{route('unlike', ['idPost' => $post->id])}}">
+                            {{$post->like}} Dislike: <img width="75%" src="{{ asset('images/dislike.svg') }}">
+                        </a>
+                        
                         <p>Comentarios: {{$post->coments}}</p>
                     </div>
-
-               </div>   
-
-           @endforeach
+                </div>
+            @endforeach   
 
        </div>
 
