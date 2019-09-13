@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Photology\User;
 use Photology\Post;
 use Photology\Like;
+use Photology\Comments;
 
 class PostsController extends Controller
 
@@ -20,12 +21,11 @@ class PostsController extends Controller
    }
 
    public function index(){
-        $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','users.name','likes.like_id','likes.post_id')
-        ->join('users', 'users.id', '=', 'posts.user_id')
-        ->join('likes', 'likes.post_id', '=', 'posts.id')
-        ->get();
+        $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','users.name')->join('users', 'users.id', '=', 'posts.user_id')->get();
+        $like = Like::join('posts', 'posts.user_id', '=', 'likes.user_id')->get();
+        
         //dd($posts);
-        return view('posts.list')->with('posts', $posts);
+        return view('home')->with('posts', $posts)->with('like', $like);
     }
 
    public function create() {
@@ -94,10 +94,11 @@ class PostsController extends Controller
     }
 
     public function comments(Request $request){
+        //dd($request);
         Comments::create([
             'user_id' => auth()->user()->id,
-            'post_id' => $request->post_id,
-            'text' => $request->text
+            'post_id' => request('post_id'),
+            'text' => request('text')
         ])->save();
 
         return redirect()->back();

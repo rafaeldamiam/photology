@@ -17,3 +17,5 @@ Route::resource('notifications', 'NotificationController');
 Route::get('/like/{idPost}','PostsController@like')->name('like');
 
 Route::get('/unlike/{idPost}','PostsController@unlike')->name('unlike');
+
+Route::post('/comments', 'PostsController@comments')->name('comments');
