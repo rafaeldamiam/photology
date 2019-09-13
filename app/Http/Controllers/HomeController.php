@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Photology\User;
 use Photology\Post;
 use Photology\Like;
+use Photology\Comments;
 
 class HomeController extends Controller
 
@@ -56,12 +57,12 @@ class HomeController extends Controller
     }
 
     public function home(){
-        //$posts = Post::all();
-        $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','users.name')->join('users', 'users.id', '=', 'posts.user_id')->get();
+        $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','users.name')
+        ->join('users', 'users.id', '=', 'posts.user_id')->get();
         $like = Like::join('posts', 'posts.user_id', '=', 'likes.user_id')->get();
-        
+        $comment = Comments::join('posts', 'posts.id', '=', 'comments.post_id')->get();
         //dd($posts);
-        return view('home')->with('posts', $posts)->with('like', $like);
+        return view('home')->with('posts', $posts)->with('like', $like)->with('comment', $comment);
 
     }
 

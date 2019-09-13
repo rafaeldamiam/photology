@@ -22,7 +22,7 @@
                             {{$post->like}} Dislike: <img width="75%" src="{{ asset('images/dislike.svg') }}">
                         </a>
                         
-                        <p>Comentarios: {{$post->text}}</p>
+                        <p>Comentarios:</p>
                         <form action="{{route('comments')}}" method="POST">
                             @csrf
                             <div class="form-group">
@@ -31,6 +31,11 @@
                             <input type="hidden" value="{{$post->id}}" name="post_id">
                             <button type="submit" class="btn btn-dark">Comentar</button>
                         </form>
+                        @foreach($comment as $comments)
+                            @if ($comments->post_id == $post->id)
+                                <p>{{$comments->text}}</p>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             @endforeach   
