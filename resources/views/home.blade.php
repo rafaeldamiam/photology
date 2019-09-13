@@ -18,17 +18,14 @@
                    <div class="card-body">
                         <p>Descrição: {{$post->description}}</p> 
                         @foreach ($like as $likes)
-                            @if($likes->post_id == $post->id)
-                                @if($likes->user_id =! $post->user_id)
                                     <a class="btn" href="{{route('like', ['idPost' => $post->id])}}">
-                                    Curtidas: {{$post->like}} <img src="{{ asset('images/like.svg') }}" width="60%">
+                                    Curtidas: {{$post->like}} <img src="{{ asset('images/like.svg') }}" width="110%">
                                     </a>
-                                @else
+                               
                                     <a class="btn" href="{{route('unlike', ['idPost' => $post->id])}}">
-                                    Curtidas: {{$post->like}} <img src="{{ asset('images/dislike.svg') }}" width="60%">
+                                    Curtidas: {{$post->like}} <img src="{{ asset('images/dislike.svg') }}" width="75%">
                                     </a>
-                                @endif
-                            @endif
+
                         @endforeach
                         <p>Comentarios: {{$post->coments}}</p>
                     </div>

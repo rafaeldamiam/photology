@@ -20,12 +20,15 @@ class PostsController extends Controller
    }
 
    public function index(){
-        $id = auth()->id();
+        $posts = Post::select('*')->join('users', 'posts.user_id', '=', 'users.id')->get();
+        $like = Like::join('posts', 'posts.user_id', '=', 'likes.user_id')->get();
+        return view('posts.list')->with('posts', $posts)->with('like', $like);
+        //$id = auth()->id();
         //dd($id);
-        $posts = Post::all()->where('user_id', $id);
-        $user = User::all()->where('id', $id);
+        //$posts = Post::all()->where('user_id', $id);
+        //$user = User::all()->where('id', $id);
         //dd($user);
-        return view('posts.list', compact('posts', 'user'));
+        //return view('posts.list', compact('posts', 'user'));
 
    }
 
@@ -82,10 +85,23 @@ class PostsController extends Controller
         return redirect()->back();
    }
 
-    public function unlike(Request $data){
-        $post_like = Post::findOrFail($data['idPost']);
-        $post_like->likes -= 1;
-        $post_like->save();
+    public function unlike($post_id){
+        $a = Like::select('like_id')
+            ->where('user_id', auth()->id())
+            ->where('post_id', $post_id)
+            ->get();
+        $b = Post::select('')
+            ->where('post_id', $post_id)
+            ->get();
+        if ($a->like_id =! 0){
+            Like::destroy($a->like_id);
+            $post_like = Post::findOrFail($post_id);
+            $post_like->like -= 1;
+            $post_like->save();
+            //dd($post_like);
+    
+        }
+        
         return redirect()->back();
     }
 
