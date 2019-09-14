@@ -21,11 +21,16 @@ class PostsController extends Controller
    }
 
    public function index(){
-        $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','users.name')
-        ->join('users', 'users.id', '=', 'posts.user_id')->get();
+        $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','posts.created_at','users.name')
+        ->join('users', 'users.id', '=', 'posts.user_id')
+        ->where('posts.user_id', auth()->id())
+        ->where('users.id', auth()->id())
+        ->get();
         $like = Like::join('posts', 'posts.user_id', '=', 'likes.user_id')->get();
-        $comment = Comments::join('posts', 'posts.id', '=', 'comments.post_id')->get();
-        //dd($posts);
+        $comment = Comments::select('comments.text', 'comments.post_id', 'users.name')
+        ->join('posts', 'posts.id', '=', 'comments.post_id')
+        ->join('users', 'users.id', '=', 'comments.user_id')
+        ->get();
         return view('home')->with('posts', $posts)->with('like', $like)->with('comment', $comment);
     }
 
@@ -61,8 +66,7 @@ class PostsController extends Controller
 
    }
 
-   public function like($post_id){
-        //dd($post_id);
+    public function like($post_id){
         $a = Like::select('like_id')
             ->where('user_id', auth()->id())
             ->where('post_id', $post_id)
@@ -75,17 +79,13 @@ class PostsController extends Controller
             $post_like = Post::findOrFail($post_id);
             $post_like->like += 1;
             $post_like->save();
-
-            //dd($post_like);
-    
         }
         
         return redirect()->back();
-   }
+    }
 
     public function unlike($post_id){
         $a = Like::where('post_id', '=', $post_id)->where('user_id', '=', auth()->id())->delete();
-        //dd($a);
         if($a == 1){
             $post_like = Post::findOrFail($post_id);
             $post_like->like -= 1;
@@ -95,7 +95,6 @@ class PostsController extends Controller
     }
 
     public function comments(Request $request){
-        //dd($request);
         Comments::create([
             'user_id' => auth()->user()->id,
             'post_id' => request('post_id'),

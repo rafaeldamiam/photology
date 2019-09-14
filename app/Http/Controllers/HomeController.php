@@ -57,11 +57,13 @@ class HomeController extends Controller
     }
 
     public function home(){
-        $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','users.name')
+        $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','posts.created_at','users.name')
         ->join('users', 'users.id', '=', 'posts.user_id')->get();
         $like = Like::join('posts', 'posts.user_id', '=', 'likes.user_id')->get();
-        $comment = Comments::join('posts', 'posts.id', '=', 'comments.post_id')->get();
-        //dd($posts);
+        $comment = Comments::select('comments.text', 'comments.post_id', 'users.name')
+        ->join('posts', 'posts.id', '=', 'comments.post_id')
+        ->join('users', 'users.id', '=', 'comments.user_id')
+        ->get();
         return view('home')->with('posts', $posts)->with('like', $like)->with('comment', $comment);
 
     }
