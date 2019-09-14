@@ -60,7 +60,7 @@ class HomeController extends Controller
         $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','posts.created_at','users.name')
         ->join('users', 'users.id', '=', 'posts.user_id')->get();
         $like = Like::join('posts', 'posts.user_id', '=', 'likes.user_id')->get();
-        $comment = Comments::select('comments.text', 'comments.post_id', 'users.name')
+        $comment = Comments::select('comments.text', 'comments.post_id', 'users.name', 'comments.user_id', 'comments.comment_id')
         ->join('posts', 'posts.id', '=', 'comments.post_id')
         ->join('users', 'users.id', '=', 'comments.user_id')
         ->get();
