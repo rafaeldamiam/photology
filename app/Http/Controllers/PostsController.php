@@ -24,10 +24,21 @@ class PostsController extends Controller
         $comment = Comments::select('comments.text', 'comments.post_id', 'users.name', 'comments.user_id', 'comments.comment_id')
         ->join('posts', 'posts.id', '=', 'comments.post_id')
         ->join('users', 'users.id', '=', 'comments.user_id')
-        ->where('comments.post_id', 'posts.id')
         ->get();
         $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','posts.created_at','users.name')
         ->join('users', 'users.id', '=', 'posts.user_id')->where('posts.user_id', auth()->id())->get();
+        $like = Like::join('posts', 'posts.user_id', '=', 'likes.user_id')->get();
+        return view('posts.list')->with('posts', $posts)->with('like', $like)->with('comment', $comment);
+
+    }
+
+    public function verPerfil($id){
+        $comment = Comments::select('comments.text', 'comments.post_id', 'users.name', 'comments.user_id', 'comments.comment_id')
+        ->join('posts', 'posts.id', '=', 'comments.post_id')
+        ->join('users', 'users.id', '=', 'comments.user_id')
+        ->get();
+        $posts = Post::select('posts.id','posts.user_id','posts.image_path','posts.description','posts.like','posts.created_at','users.name')
+        ->join('users', 'users.id', '=', 'posts.user_id')->where('posts.user_id', $id);
         $like = Like::join('posts', 'posts.user_id', '=', 'likes.user_id')->get();
 
         return view('posts.list')->with('posts', $posts)->with('like', $like)->with('comment', $comment);

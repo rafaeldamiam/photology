@@ -12,6 +12,8 @@ Route::get('/posts/create','PostsController@create');
 
 Route::post('/posts','PostsController@store');
 
+Route::get('/posts/{id}', 'PostsController@verPerfil')->name('verperfil');
+
 Route::resource('notifications', 'NotificationController');
 
 Route::get('/like/{idPost}','PostsController@like')->name('like');

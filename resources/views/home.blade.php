@@ -10,7 +10,7 @@
            @foreach ($posts as $post)
                 <div class="card mt-4">
                     <div class="card-body">
-                        <h3 style="text-transform:capitalize;">{{$post->name}}</h3>
+                        <a class="btn" href="{{route('verperfil', ['id' => $post->id])}}"><h3 style="text-transform:capitalize; text-decoration: none;">{{$post->name}}</h3></a>
                         <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap" style="padding:10%;">
                         <p><strong>Postado em:</strong> {{$post->created_at}}</p>
                         <p><strong>Descrição:</strong> {{$post->description}}</p> 

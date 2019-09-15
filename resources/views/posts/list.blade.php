@@ -4,7 +4,7 @@
 
 <div class="container">
 <div class="row justify-content-center">
-    @if(count($posts) == 0)
+    @if($posts == false)
         <div class="text-center">
             <h1>Está vazio!!</h1><br>
             <h2>Crie um Postagem e compartilhe com o mundo!</h2><br>
